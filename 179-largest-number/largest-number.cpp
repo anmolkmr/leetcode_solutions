@@ -16,16 +16,7 @@ public:
                 string temp1=to_string(nums[i])+to_string(nums[j]);
                 string temp2=to_string(nums[j])+to_string(nums[i]);
                 int l=0,m=0;
-                while(l<temp1.size()&&m<temp1.size()&&temp1[l]==temp2[m])
-                {
-                    if((temp1[l]-'0')==(temp2[m]-'0'))
-                    {
-                        l++;
-                        m++;
-                    }
-                    
-                }
-                if((temp1[l]-'0')<(temp2[m]-'0'))
+                if(temp1<temp2)
                         swap(nums[i],nums[j]);
 
             }
