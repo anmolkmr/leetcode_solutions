@@ -11,13 +11,17 @@
  */
 class Solution {
 public:
-    void trav(TreeNode *root,vector<TreeNode*> &allnode)
+    void trav(TreeNode *root,vector<TreeNode*> &allnode,int &ans)
     {
         if(root==NULL)
         return ;
-        allnode.push_back(root);
-        trav(root->left,allnode);
-        trav(root->right,allnode);
+        // allnode.push_back(root);
+        int count=0,sum=0;
+        avg(root,count,sum);
+        if(root->val==sum/count)
+        ans++;
+        trav(root->left,allnode,ans);
+        trav(root->right,allnode,ans);
     }
     void avg(TreeNode *root,int &count,int &sum)
     {
@@ -30,14 +34,7 @@ public:
     int averageOfSubtree(TreeNode* root) {
         vector<TreeNode*> allnode;
         int ans=0;
-        trav(root,allnode);
-        for(auto it:allnode)
-        {
-            int count=0,sum=0;
-            avg(it,count,sum);
-            if(it->val==sum/count)
-            ans++;
-        }
+        trav(root,allnode,ans);
         return ans;
     }
 };
