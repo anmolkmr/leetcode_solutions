@@ -11,9 +11,11 @@ public:
         if(buy)
         {
            profit=max(-prices[ind]+solve(ind+1,0,cnt,prices,dp),solve(ind+1,1,cnt,prices,dp));
+           dp[ind][buy][cnt]=profit;
         }
         else{
            profit=max((prices[ind]+solve(ind+1,1,cnt+1,prices,dp)),solve(ind+1,0,cnt,prices,dp));
+           dp[ind][buy][cnt]=profit;
         }
         return dp[ind][buy][cnt]=profit;
     }
