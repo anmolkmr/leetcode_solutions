@@ -1,31 +1,30 @@
 class Solution {
 public:
     map<char,int> mp;
-    bool ischk(string s,map<char,int> temp)
+    bool ischk(map<char,int> mp1)
     {
-        for(auto it:s)
-            {
-                if(mp[it]<temp[it])
-                return false;
-            }
-            return true;
+        for(auto it:mp1)
+        {
+            if(mp1[it.first]>mp[it.first])
+            return false;
+        }
+        return true;
     }
-
-    int countCharacters(vector<string>& words, string chars) {
-        
+    int countCharacters(vector<string>& words, string chars) {      
         for(auto it:chars)
         mp[it]++;
         int ans=0;
         for(auto it:words)
         {
-            map<char,int> temp;
+            map<char,int> mp1;
             for(auto it1:it)
-            temp[it1]++;
-            if(ischk(it,temp))
+            mp1[it1]++;
+            if(ischk(mp1)==true)
             {
-                ans+=it.length();
+                ans+=it.size();
             }
         }
         return ans;
+
     }
 };
