@@ -7,7 +7,7 @@ public:
         int take=0,nottake=solve(ind+1,prev,nums,dp);
         if(prev==-1||nums[ind]>nums[prev])
         take=1+solve(ind+1,ind,nums,dp);
-        if(prev==-1)return max(take,nottake);
+      //  if(prev==-1)return max(take,nottake);
         return dp[ind][prev+1]=max(take,nottake);
     }
     int lengthOfLIS(vector<int>& nums) {
