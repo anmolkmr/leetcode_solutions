@@ -25,12 +25,6 @@ public:
             colo.push_back(sum-zero);
         } 
 
-        for(auto it:rowo)
-        cout<<it<<" ";
-        cout<<endl;
-         for(auto it:colo)
-        cout<<it<<" ";
-        cout<<endl;
         for(int i=0;i<rowo.size();i++)
         {
             vector<int> temp;
