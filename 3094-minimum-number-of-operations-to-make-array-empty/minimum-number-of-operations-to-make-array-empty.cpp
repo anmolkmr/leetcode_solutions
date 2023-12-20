@@ -12,9 +12,7 @@ public:
             if(it.second==1)return -1;
             if(it.second%3==0)
             cnt+=(it.second/3);
-            else if(it.second%3==1)
-            cnt+=(it.second/3)+1;
-            else if(it.second%3==2)
+            else if(it.second%3)
             cnt+=(it.second/3)+1;
             else if(it.second%2==0)
             cnt+=(it.second/2);
