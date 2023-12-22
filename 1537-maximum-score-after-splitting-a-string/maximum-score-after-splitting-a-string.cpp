@@ -5,10 +5,10 @@ public:
         for(auto it:s)
         mp[it]++;
         int zero=0,one=0;
-        // if(mp['1']==0)
-        // return mp['0']-1;
-        // else if(mp['0']==0)
-        // return mp['1']-1;
+        if(mp['1']==0)
+        return mp['0']-1;
+        else if(mp['0']==0)
+        return mp['1']-1;
         int mx=INT_MIN;
         for(int i=0;i<s.length();i++)
         {
