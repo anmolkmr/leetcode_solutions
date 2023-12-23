@@ -10,31 +10,26 @@ public:
             if(it=='N')
             {
                 i=i+1;
-                st.insert({i,j});
-                if(t==st.size())
-                return true;
+                
             }
             else if(it=='E')
             {
                 j=j+1;
-                st.insert({i,j});
-                if(t==st.size())
-                return true;
+               
             }
             else if(it=='S')
             {
                 i=i-1;
-                st.insert({i,j});
-                if(t==st.size())
-                return true;
+               
             }
             else if(it=='W')
             {
                 j=j-1;
-                st.insert({i,j});
-                if(t==st.size())
-                return true;
+               
             }
+            if(st.find({i,j})!=st.end())
+            return true;
+            st.insert({i,j});
 
         }
         return false;
