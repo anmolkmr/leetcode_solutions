@@ -36,9 +36,6 @@ public:
             mp[sorted[i]]=sum;
         }
         
-        for(auto it:mp){
-            cout<<it.first<<" "<<it.second<<endl;
-        }
         gst(mp,root);
 
         return root;
