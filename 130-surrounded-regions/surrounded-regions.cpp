@@ -17,7 +17,7 @@ public:
                 if(dx>=0&&dy>=0&&dx<board.size()&&dy<board[0].size()&&vis[dx][dy]!=1&&board[dx][dy]!='X'){
                     q.push({dx,dy});
                     vis[dx][dy]=1;
-                    board[i][j]='P';
+                    board[dx][dy]='P';
                 }
             }
         }
@@ -41,23 +41,14 @@ public:
                 trav(row-1,i,board,vis);
             }
         }
-
-        // for(auto it:vis){
-        //     for(auto it1:it){
-        //         cout<<it1<<" ";
-        //     }
-        //     cout<<endl;
-        // }
-
-
         for(int i=0;i<row;i++){
             for(int j=0;j<col;j++){
                 if(board[i][j]=='O')
                 board[i][j]='X';
                 if(board[i][j]=='P')
                 board[i][j]='O';
-                if(vis[i][j]==1)
-                board[i][j]='O';
+                // if(vis[i][j]==1)
+                // board[i][j]='O';
             }
         }
     }
