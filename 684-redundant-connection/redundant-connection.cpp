@@ -17,6 +17,13 @@ public:
         if(vis[k])return true;
         return false;
     }
+    void dfs(int n,vector<int>& vis,map<int,vector<int>>&adj){
+        vis[n]=1;
+        for(auto it:adj[n]){
+            if(!vis[it])
+            dfs(it,vis,adj);
+        }
+    }
     vector<int> findRedundantConnection(vector<vector<int>>& edges) {
         map<int,vector<int>> adj;
         map<int,int> nodes;
@@ -24,7 +31,8 @@ public:
             if(nodes[it[0]]>0&&nodes[it[1]]>0){
                 cout<<"asd"<<it[0]<<it[1]<<endl;
                 vector<int> vis(edges.size()+1);
-                if(bfs(it[0],vis,adj,it[1])){
+                dfs(it[0],vis,adj);
+                if(vis[it[1]]){
                     return it;
                 }
             }
