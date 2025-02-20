@@ -1,34 +1,31 @@
 class Solution {
 public:
-    void findbin(string s,vector<string> &bin,int n)
-    {
-        if(s.length()==n)
-        {
-            bin.push_back(s);
+    void solve(int ind,int n,string &ds,vector<string> &ans ){
+        if(ind>=n){
+            ans.push_back(ds);
             return ;
         }
-        findbin(s+"0",bin,n);
-        findbin(s+"1",bin,n);
-    }
-    bool find(vector<string> &n,string t)
-    {
-        for(auto it:n)
-        {
-            if(it==t)
-            return true;
-        }
-        return false;
+        ds+="0";
+        solve(ind+1,n,ds,ans);
+        ds.pop_back();
+        ds+="1";
+        solve(ind+1,n,ds,ans);
+        ds.pop_back();
     }
     string findDifferentBinaryString(vector<string>& nums) {
-        vector<string> bin;
-        string s="";
         int n=nums[0].length();
-        findbin(s,bin,n);
-        for(auto it:bin)
+        vector<string> ans;
+        string ds="";
+        solve(0,n,ds,ans);
+        map<string,int> mp;
+        for(auto it:nums){
+            mp[it]++;
+        }
+        for(auto it:ans)
         {
-            if(!find(nums,it))
+            if(mp.find(it)==mp.end())
             return it;
         }
-        return "10001";
+        return ds;
     }
 };
