@@ -1,37 +1,30 @@
 class Solution {
 public:
-bool check(vector<int>&c,int mid,long long k)
-{
-    for(int i=0;i<c.size();i++)
-    {
-        k-=(c[i]/mid);
-        if(k<=0)
-        {
+    bool check(int m,vector<int>& candies, long long k){
+        long long count=0,sum=0;
+        if(m==0)return true;
+        for(auto it:candies){
+            if(it>=m)
+            count+=(it/m);
+        }
+        if(count>=k){
             return true;
         }
-
+        return false;
     }
-    return false;
-}
-    int maximumCandies(vector<int>& c, long long k) {
-        int n=c.size();
-        int low=1;
-        int high=*max_element(c.begin(),c.end());
+    int maximumCandies(vector<int>& candies, long long k) {
+        int right=*max_element(candies.begin(),candies.end()),left=0;
         int ans=0;
-        while(low<=high)
-        {
-            int mid=(low+high)>>1;
-            if(check(c,mid,k))
-            {
-                ans=mid;
-                low=mid+1;
-            }
-            else
-            {
-                high=mid-1;
+        while(left<=right){
+            int mid=left+(right-left)/2;
+            if(check(mid,candies,k)){
+                ans=max(ans,mid);
+                left=mid+1;
+            }else{
+                right=mid-1;
             }
         }
         return ans;
     }
+
 };
-//CODED BY ANUSHKA AGGARWAL HU HA HA HAAAA
