@@ -1,53 +1,68 @@
-class Trie {
+class Node{
     public:
-    struct Node{
-        Node *list[26];
-        bool isEnd=false;
-        bool iscontain(int ind)
-        {
-            return list[ind]!=NULL;
-        }
-    };
-    private:
-    Node* root;
+    Node *list[26];
+    bool End=false;
+
+    bool containsKey(char ch){
+        return list[ch-'a']!=NULL;
+    }
+
+    void put(char ch,Node *node){
+        list[ch-'a']=node;
+    }
+
+    Node* get(char ch){
+        return list[ch-'a'];
+    }
+
+    void setEnd(){
+        End=true;
+    }
+
+    bool isEnd(){
+        return End;
+    }
+
+};
+class Trie {
 public:
+    Node *root;
     Trie() {
-        root=new Node();
+         root = new Node();
     }
     
     void insert(string word) {
-        Node* node=root;
-        for(int i=0;i<word.length();i++)
-        {
-            if(!node->iscontain(word[i]-'a'))
-            {
-                node->list[word[i]-'a']=new Node();
+        Node *node = root;
+        for(auto it:word){
+            if(!node->containsKey(it)){
+                node->put(it,new Node());
             }
-            node=node->list[word[i]-'a'];
+            node = node->get(it);
         }
-        node->isEnd=true;
+        node->setEnd();
+
     }
     
     bool search(string word) {
-        Node *node=root;
-        for(int i=0;i<word.length();i++)
-        {
-            if(!node->iscontain(word[i]-'a'))
+        Node *node = root;
+        for(auto it:word){
+            if(!node->containsKey(it))
             return false;
-            node=node->list[word[i]-'a'];
+            node = node->get(it);
         }
-        return node->isEnd==true;
+        return node->isEnd();
+        
     }
     
     bool startsWith(string prefix) {
-         Node *node=root;
-        for(int i=0;i<prefix.length();i++)
-        {
-            if(!node->iscontain(prefix[i]-'a'))
+         Node *node = root;
+        for(auto it:prefix){
+            if(!node->containsKey(it))
             return false;
-            node=node->list[prefix[i]-'a'];
+            node = node->get(it);
         }
         return true;
+        
     }
 };
 
