@@ -1,53 +1,44 @@
 class Solution {
 public:
-    void merge(vector<int> &arr,int l,int m,int r)
-    {
-        int i=l;
-        int j=m+1;
+    void merge(int l,int m,int r,vector<int> &nums){
+        int i=l,j=m+1;
         vector<int> res;
-        while(i<=m&&j<=r)
-        {
-            if(arr[i]>=arr[j])
-            {
-                res.push_back(arr[j]);
-                j++;
-            }
-            else{
-                res.push_back(arr[i]);
+        while(i<=m&&j<=r){
+            if(nums[i]<=nums[j]){
+                res.push_back(nums[i]);
                 i++;
             }
+            else{
+                res.push_back(nums[j]);
+                j++;
+            }
         }
-        while(i<=m)
-        {
-            res.push_back(arr[i]);
+        while(i<=m){
+            res.push_back(nums[i]);
             i++;
         }
-        while(j<=r)
-        {
-            res.push_back(arr[j]);
+        while(j<=r){
+            res.push_back(nums[j]);
             j++;
         }
-        int index=0;
-        for(int i=l;i<=r;i++)
-        {
-            arr[i]=res[index];
-            index++;
+        int ind=0;
+        for(int i=l;i<=r;i++){
+            nums[i]=res[ind];
+            ind++;
         }
     }
-    void mergesort(vector<int> &nums,int l,int r)
-    {
-        if(l<r)
-        {
-            int m=l+(r-l)/2;
-            mergesort(nums,l,m);
-            mergesort(nums,m+1,r);
-            merge(nums,l,m,r);
+    void mergesort(int l,int r,vector<int> &nums){
+        
+        if(l<r){
+            int mid=l+(r-l)/2;
+            mergesort(l,mid,nums);
+            mergesort(mid+1,r,nums);
+            merge(l,mid,r,nums);
+
         }
     }
     vector<int> sortArray(vector<int>& nums) {
-        int l=0;
-        int r=nums.size()-1;
-        mergesort(nums,l,r);
-        return nums;      
+        mergesort(0,nums.size()-1,nums);
+        return nums;
     }
 };
