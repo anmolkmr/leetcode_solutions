@@ -15,10 +15,10 @@ public:
     }
     int reverseBits(int n) {
         string bin = toBin(n);
-        cout<<bin;
+        int d=bin.length();
         long long ans=0;
-        int ind=32-bin.length();
-        for(int i=bin.length()-1;i>=0;i--){
+        int ind=32-d;
+        for(int i=d-1;i>=0;i--){
             if(bin[i]=='1'){
                 ans+=pow(2,ind);
             }
