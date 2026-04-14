@@ -1,26 +1,32 @@
 class Solution {
 public:
-    long long solve(int ri,int fi,vector<int> &r,vector<int> &f,vector<vector<long long>> &dp){
-        if(ri==r.size())return 0;
-        if(fi==f.size())return 1e12;
-        if(dp[ri][fi]!=-1)return dp[ri][fi];
+    long long dp[101][10001];
 
-        long long pick = abs(r[ri]-f[fi])+solve(ri+1,fi+1,r,f,dp);
-        long long notpick = solve(ri,fi+1,r,f,dp);
+    long long solve(int i, int j, vector<int>& robot, vector<int>& f) {
+        if (i == robot.size()) return 0;
+        if (j == f.size()) return 1e15; // large value instead of INT_MAX
 
-        return dp[ri][fi]=min(pick,notpick);
+        if (dp[i][j] != -1) return dp[i][j];
+
+        long long pick = abs(robot[i] - f[j]) + solve(i + 1, j + 1, robot, f);
+        long long skip = solve(i, j + 1, robot, f);
+
+        return dp[i][j] = min(pick, skip);
     }
+
     long long minimumTotalDistance(vector<int>& robot, vector<vector<int>>& factory) {
-        sort(robot.begin(),robot.end());
-        sort(factory.begin(),factory.end());
-        vector<int> factories;
-        for(auto it:factory){
-            for(int i=0;i<it[1];i++){
-                factories.push_back(it[0]);
+        sort(robot.begin(), robot.end());
+        sort(factory.begin(), factory.end());
+
+        vector<int> f;
+        for (auto &it : factory) {
+            for (int i = 0; i < it[1]; i++) {
+                f.push_back(it[0]);
             }
         }
-        vector<vector<long long>> dp(robot.size()+1,vector<long long>(factories.size()+1,-1));
-        return solve(0,0,robot,factories,dp);
-        
+
+        memset(dp, -1, sizeof(dp));
+
+        return solve(0, 0, robot, f);
     }
 };
