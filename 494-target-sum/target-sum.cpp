@@ -1,18 +1,22 @@
 class Solution {
 public:
-    int solve(int ind,int tar,vector<int> &nums)
-    {
-        if(ind<0)
-        {
-            if(tar==0)return 1;
-            return 0;
-        }
-       int pos=solve(ind-1,tar-nums[ind],nums);
-       int neg=solve(ind-1,tar+nums[ind],nums);
-        return pos+neg;
-    }
-    int findTargetSumWays(vector<int>& nums, int target) {
-        return solve(nums.size()-1,target,nums);
+    unordered_map<string,int> dp;
 
+    int solve(int ind, vector<int>& nums, int target, int sum) {
+        if(ind == nums.size()) {
+            return sum == target;
+        }
+
+        string key = to_string(ind) + "," + to_string(sum);
+
+        if(dp.count(key)) return dp[key];
+
+        return dp[key] =
+            solve(ind + 1, nums, target, sum + nums[ind]) +
+            solve(ind + 1, nums, target, sum - nums[ind]);
+    }
+
+    int findTargetSumWays(vector<int>& nums, int target) {
+        return solve(0, nums, target, 0);
     }
 };
