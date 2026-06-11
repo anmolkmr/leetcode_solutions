@@ -1,14 +1,14 @@
 class Solution {
 public:
-    int f(string &x,string &y,int i,int j,vector<vector<int>> &dp){
-        if(i < 0 || j < 0)return 0;
-        if(dp[i][j] != -1)return dp[i][j];
-        if(x[i] == y[j])
-            return dp[i][j] = 1 + f(x,y,i-1,j-1,dp);
-        return dp[i][j] =  max(f(x,y,i-1,j,dp) , f(x,y,i,j-1,dp));
+    int solve(int n1,int n2,string &text1,string &text2,vector<vector<int>> &dp){
+        if(n1<0||n2<0)return 0;
+        if(dp[n1][n2]!=-1)return dp[n1][n2];
+        if(text1[n1]==text2[n2])return 1+solve(n1-1,n2-1,text1,text2,dp);
+        return dp[n1][n2]=max(solve(n1-1,n2,text1,text2,dp),solve(n1,n2-1,text1,text2,dp));
+        
     }
     int longestCommonSubsequence(string text1, string text2) {
-        vector<vector<int>> dp(text1.length()+1,vector<int>(text2.length()+1,-1));
-       return f(text1,text2,text1.length()-1,text2.length(),dp); 
+        vector<vector<int>> dp(text1.size()+1,vector<int>(text2.size()+1,-1));
+        return solve(text1.size()-1,text2.size()-1,text1,text2,dp);
     }
 };
